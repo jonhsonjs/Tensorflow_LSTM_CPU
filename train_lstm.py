@@ -112,6 +112,7 @@ class _LSTMModel(ts_model.SequentialTimeSeriesModel):
       new_state_tuple = (current_times, transformed_values, lstm_state)
     return (new_state_tuple, predictions)
 
+
   def _prediction_step(self, current_times, state):
     """Advance the RNN state using a previous observation or prediction."""
     _, previous_observation_or_prediction, lstm_state = state
