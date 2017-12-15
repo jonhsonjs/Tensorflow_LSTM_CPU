@@ -30,7 +30,7 @@ def main(_):
         num_features=1,
         loss=tf.contrib.timeseries.ARModel.NORMAL_LIKELIHOOD_LOSS)
 
-    ar.train(input_fn=train_input_fn, steps=6000)
+    ar.train(input_fn=train_input_fn, steps=5000)
 
     evaluation_input_fn = tf.contrib.timeseries.WholeDatasetInputFn(reader)
     # keys of evaluation: ['covariance', 'loss', 'mean', 'observed', 'start_tuple', 'times', 'global_step']
