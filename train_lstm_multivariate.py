@@ -28,6 +28,7 @@ import matplotlib
 matplotlib.use("agg")
 import matplotlib.pyplot as plt
 
+
 class _LSTMModel(ts_model.SequentialTimeSeriesModel):
   """A time series model-building example using an RNNCell."""
 
