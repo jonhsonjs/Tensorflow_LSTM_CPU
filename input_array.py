@@ -19,7 +19,6 @@ data = {
 }
 
 reader = NumpyReader(data)
-
 with tf.Session() as sess:
     full_data = reader.read_full()
     coord = tf.train.Coordinator()
