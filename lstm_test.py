@@ -14,6 +14,7 @@ from keras.models import Sequential
 
 warnings.filterwarnings("ignore")
 
+
 def load_data(filename, seq_len, normalise_window):
     f = open(filename, 'r+').read()
     data = f.split('\n')
@@ -52,12 +53,14 @@ def load_data(filename, seq_len, normalise_window):
 
     return [x_train, y_train, x_test, y_test]
 
+
 def normalise_windows(window_data):
     normalised_data = []
     for window in window_data:   #window shape (sequence_length L ,)  即(51L,)
         normalised_window = [((float(p) / float(window[0])) - 1) for p in window]
         normalised_data.append(normalised_window)
     return normalised_data
+
 
 def build_model(layers):  #layers [1,50,100,1]
     model = Sequential()
@@ -76,12 +79,14 @@ def build_model(layers):  #layers [1,50,100,1]
     print("Compilation Time : ", time.time() - start)
     return model
 
+
 #直接全部预测
 def predict_point_by_point(model, data):
     predicted = model.predict(data)
     print('predicted shape:',np.array(predicted).shape)  #(412L,1L)
     predicted = np.reshape(predicted, (predicted.size,))
     return predicted
+
 
 #滚动预测
 def predict_sequence_full(model, data, window_size):  #data X_test
@@ -93,6 +98,7 @@ def predict_sequence_full(model, data, window_size):  #data X_test
         curr_frame = curr_frame[1:]
         curr_frame = np.insert(curr_frame, [window_size-1], predicted[-1], axis=0)   #numpy.insert(arr, obj, values, axis=None)
     return predicted
+
 
 def predict_sequences_multiple(model, data, window_size, prediction_len):  #window_size = seq_len
     prediction_seqs = []
@@ -106,6 +112,7 @@ def predict_sequences_multiple(model, data, window_size, prediction_len):  #wind
         prediction_seqs.append(predicted)
     return prediction_seqs
 
+
 def plot_results(predicted_data, true_data, filename):
     fig = plt.figure(facecolor='white')
     ax = fig.add_subplot(111)
@@ -114,6 +121,7 @@ def plot_results(predicted_data, true_data, filename):
     plt.legend()
     plt.show()
     plt.savefig(filename+'.png')
+
 
 def plot_results_multiple(predicted_data, true_data, prediction_len):
     fig = plt.figure(facecolor='white')
@@ -126,6 +134,7 @@ def plot_results_multiple(predicted_data, true_data, prediction_len):
         plt.legend()
     plt.show()
     plt.savefig('plot_results_multiple.png')
+
 
 if __name__=='__main__':
     global_start_time = time.time()
