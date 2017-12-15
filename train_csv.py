@@ -5,7 +5,7 @@ import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import tensorflow as tf
-
+import sys
 
 def main(_):
     csv_file_name = './data/cpuData.csv'
