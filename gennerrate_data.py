@@ -44,6 +44,8 @@ def generate_10min():
     plt.plot(train_x, train_y, color='r')
     plt.show()
     return train_x, train_y
+
+
 if __name__ == '__main__':
     lable_x = np.array(range(900, 1100))
     a = generate_10min()
